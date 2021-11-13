@@ -1,0 +1,46 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle part be gathered for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<%= root_path %>">Game Cabin</a>
+    </div>
+
+    <!-- The navbar links and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="<%= root_path %>">Home <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Category</a></li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Name of Item">
+        </div>
+        <button type="submit" class="btn btn-default">Search</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Shopping Cart</a></li>
+        <% unless user_signed_in? %>
+          <li><a href="<%= new_user_registration_path %>">Registration</a></li>
+          <li><a href="<%= new_user_session_path %>">Sign In</a></li>
+        <% else %>
+          <li><a href="#">Welcome, <%= current_user.username %></a></li>
+          <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+        <% end %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">My Order</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Personal detal</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
