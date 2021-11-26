@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
    before_action :authenticate_user!
    # Make it easy for searching
    before_action :get_categories_and_carts_num
-  
+
   before_action :product_params, only: [:create, :update]
   def index
 
@@ -39,10 +39,12 @@ class ProductsController < ApplicationController
     @root_categories = Category.roots
   # authorization method from pundit
   authorize @product
-
+ # Append user's uuid to this product so let this product give full access to this user.
+ @product.user_uuid = current_user.uuid 
 
     if @product.save
-
+      
+     
       flash[:notice] = "Successfully created."
 
       redirect_to root_path

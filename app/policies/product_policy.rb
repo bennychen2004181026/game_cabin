@@ -8,13 +8,13 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? || !product.published?
+    user.admin? || product.user_uuid == user.uuid
   end
   def edit?
-    user.admin? || !product.published?
+    user.admin? || product.user_uuid == user.uuid
   end
   def destory?
-    user.admin? || !product.published?
+    user.admin? || product.user_uuid == user.uuid
   end
 
   class Scope < Scope
