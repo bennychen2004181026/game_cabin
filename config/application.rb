@@ -9,8 +9,9 @@ Bundler.require(*Rails.groups)
 module GameCabin
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    
     config.load_defaults 6.0
-
+    config.autoload_paths += Dir[Rails.root.join('app', 'policies', '*.rb')]
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

@@ -1,14 +1,5 @@
 class ProductPolicy < ApplicationPolicy
-  class Scope < Scope
-    def resolve
-      if user.admin?
-        scope.all
-      else
-        scope.where(published: true)
-      end
-    end
-  end
-  private
+
   attr_reader :user, :product
 
   def initialize(user, product)
@@ -24,5 +15,15 @@ class ProductPolicy < ApplicationPolicy
   end
   def destory?
     user.admin? || !product.published?
+  end
+
+  class Scope < Scope
+    def resolve
+      if user.admin?
+        scope.all
+      else
+        scope.where(published: true)
+      end
+    end
   end
 end
