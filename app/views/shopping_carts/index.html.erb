@@ -1,0 +1,44 @@
+Carts (<%= @shopping_carts.count %>)</h1>
+<div class="row">
+  <div class="container">
+    <div class="alert alert-info">
+
+      <% unless @shopping_carts.blank? %>
+        <% @shopping_carts.each do |shopping_cart| %>
+          <div class="media shopping-cart-row">
+            <div class="media-left">
+            
+              <a href="<%= product_path(shopping_cart.product) %>">
+                <%= image_tag shopping_cart.product.product_image_attachment, class: 'media-object', alt: shopping_cart.product.title %>
+              </a>
+             
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading"><%= link_to shopping_cart.product.title, product_path(shopping_cart.product) %></h4>
+              amount: <%= shopping_cart.amount %> price: $<%= shopping_cart.amount * shopping_cart.product.price %>
+            </div>
+            <div class="media-right">
+              <%= form_tag shopping_cart_path(shopping_cart), method: :put do %>
+                <p><input type="text" name="amount" value="<%= shopping_cart.amount %>" /></p>
+                <p>
+                  <%= submit_tag "renew", class: "btn btn-default btn-xs" %>
+                  <%= link_to "delete", shopping_cart_path(shopping_cart), method: :delete, 'data-confirm': "Are you sure?", class: "btn btn-default btn-xs" %>
+                </p>
+              <% end %>
+            </div>
+          </div>
+  
+        <% end %>
+      <% else %>
+        <h3>The cart is empty now.</h3>
+      <% end %>
+    </div>
+
+    <div class="pull-right">
+      <strong>total: $<%= @shopping_carts.sum { |cart| cart.amount * cart.product.price } %></strong>
+      &nbsp;
+      <%= link_to "check out", new_order_path, class: "btn btn-danger btn-lg" %>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>

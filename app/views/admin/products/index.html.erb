@@ -1,0 +1,49 @@
+<div>
+  <div class="pull-right">
+    <%= link_to "New product", new_admin_product_path, class: "btn btn-primary" %>
+  </div>
+
+  <h1>
+    Product(<%= @products.total_entries %>)
+  </h1>
+</div>
+
+<div>
+
+  <table class="table table-striped">
+    <tr>
+      <th>Photo</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>UUID</th>
+      <th>Price</th>
+      <th>Inventory</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+
+    <% @products.each do |product| %>
+      <tr>
+
+ <% if product.product_image.representable? %>
+        <td><%= image_tag product.product_image.representation(resize_to_limit: [160, 160]).processed.service_url %></td>
+      <% else %>
+         <td> <%= image_tag "Product_placeholder.jpg", alt: "Default product placeholder image" %></td>
+         <% end %>
+
+        <td><%= product.id %></td>
+        <td><%= product.title %></td>
+        <td><%= product.uuid %></td>
+        <td><%= product.price %></td>
+        <td><%= product.amount %></td>
+        <td><%= product.status %></td>
+        <td align="right">
+          <%= link_to "Edit", edit_admin_product_path(product) %> 
+          <%= link_to "Delete", admin_product_path(product), method: :delete, 'data-confirm': "Are you sure?" %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= will_paginate @products %>
+</div>

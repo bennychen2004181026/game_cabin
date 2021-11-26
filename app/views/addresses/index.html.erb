@@ -1,0 +1,29 @@
+<div class="pull-right">
+  <%= link_to "Build New Adress", new_address_path, class: "btn btn-info new-address-btn" %>
+</div>
+<div class="clearfix"></div>
+<br />
+<ul class="list-group">
+  <% unless @address.blank? %>
+
+      <li class="list-group-item">
+        <label>
+          <%= @address.contact_name %>
+          <%= @address.phone %>
+          <%= @address.street_address %>
+          <%= @address.suburb %>
+          <%= @address.state %>
+          <%= @address.postcode %>
+          <%= link_to "Edit", edit_address_path(@address), class: "inline" %>
+          <%= link_to "Delete", address_path(@address), method: 'delete', "data-confirm": "Are you sure?", class: "inline" %>
+        </label>
+      </li>
+  <% else %>
+    <li class="list-group-item">
+      Please add new postage address
+    </li>
+  <% end %>
+</ul>
+<div class="col text-center">
+  <%= link_to "Back to Order menu", new_order_path, class: "btn btn-info" %>
+</div>

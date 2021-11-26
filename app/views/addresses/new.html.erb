@@ -1,0 +1,78 @@
+
+        <h2 >Postage Address</h2>
+
+      <%= form_for @address, 
+      url: (@address.new_record? ? addresses_path : address_path(@address)), 
+      method: (@address.new_record? ? :post : :put), 
+      html: { class: 'form-horizontal' }  do |f|  %>
+            <% unless @address.errors.blank? %>
+      <div class="alert alert-danger">
+        <ul class="list-unstyled">
+          <% @address.errors.messages.values.flatten.each do |error| %>
+            <li><i class="fa fa-exclamation-circle"></i> <%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+          <div class="form-group">
+            <label for="contact_name" class="col-sm-2 control-label">Contact Name:*</label>
+            <div class="col-sm-7">
+              <%= f.text_area :contact_name, class: "form-control" %>
+            </div>
+            <div class="col-sm-2 address_input_error">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="street_address" class="col-sm-2 control-label">Street Address:*</label>
+            <div class="col-sm-7">
+              <%= f.text_area :street_address, class: "form-control" %>
+            </div>
+            <div class="col-sm-2 address_input_error">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="suburb" class="col-sm-2 control-label">Suburb:*</label>
+            <div class="col-sm-7">
+              <%= f.text_area :suburb, class: "form-control" %>
+            </div>
+            <div class="col-sm-2 address_input_error">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="state" class="col-sm-2 control-label">State:*</label>
+            <div class="col-sm-7">
+              <%= f.text_area :state, class: "form-control" %>
+            </div>
+            <div class="col-sm-2 address_input_error">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="postcode" class="col-sm-2 control-label">Postcode:*</label>
+            <div class="col-sm-7">
+              <%= f.text_field :postcode, class: "form-control" %>
+            </div>
+            <div class="col-sm-2 address_input_error">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone" class="col-sm-2 control-label">Phone:*</label>
+            <div class="col-sm-7">
+              <%= f.text_field :phone, class: "form-control" %>
+            </div>
+            <div class="col-sm-2 address_input_error">
+            </div>
+          </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-8">
+          <%= f.submit "Save", class: "btn btn-primary" %>
+     </div>
+    </div>
+   
+      <% end %>
+    </div>
+  </div>
+</div>
+
+    

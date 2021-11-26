@@ -1,0 +1,54 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle part be gathered for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<%= root_path %>">Game Cabin</a>
+    </div>
+
+    <!-- The navbar links and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="<%= root_path %>">Home <span class="sr-only">(current)</span></a></li>
+      </ul>
+          <%= form_tag search_products_path, method: :get, class: "navbar-form navbar-left" do %>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Name..">
+          <% if @category %>
+            <input type="hidden" name="category_id" value="<%= @category.id %>" />
+          <% end %>
+          <input type="text" name="w" value="<%= params[:w] %>" class="form-control search-input" placeholder="<%= @category ? "Under #{@category.title} and search.." : 'Searching the all the ccategories..' %>">
+        </div>
+        <button type="submit" class="btn btn-default">Search</button>
+      </form>
+      <% end %>
+      <ul class="nav navbar-nav navbar-right">
+       <li><%= link_to "Shopping cart(#{@shopping_cart_count})", shopping_carts_path %></li>
+      
+        <% unless user_signed_in? %>
+          <li><a href="<%= new_user_registration_path %>">Registration</a></li>
+          <li><a href="<%= new_user_session_path %>">Sign In</a></li>
+        <% else %>
+        <li><a href="<%= products_path %>">Sell product</a></li>
+          <li><a href="#">Welcome, <%= current_user.username %></a></li>
+          <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+        <% end %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li role="separator" class="divider"></li>
+             <%if user_signed_in? && current_user.admin?%>
+       <li><a href="<%= admin_root_path %>">Admin Dashboard</a></li>
+       <% end %>
+            <li><a href="<%= edit_user_registration_path %>">Edit account</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

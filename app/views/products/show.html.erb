@@ -1,0 +1,41 @@
+
+<div class="row">
+  <div class="col-lg-3">
+    <%= render 'shared/categories' %>
+  </div>
+  <div class="col-lg-9">
+    <ol class="breadcrumb">
+      <li><a href="<%= root_path %>">Home</a></li>
+      <li class="active"><%= @product.category.parent.title %></li>
+      <li><a href="<%= category_path @product.category %>"><%= @product.category.title %></a></li>
+      <li class="active"><%= @product.title %></li>
+    </ol>
+    <h1><%= @product.title %></h1>
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+          <a href="#" class="thumbnail detail">
+            <%= image_tag @product.product_image.representation(resize_to_limit: [160, 160]).processed.service_url %>
+          </a>
+        </div>
+    </div>
+
+    <ul class="list-unstyled">
+      <li>UUid: <%= @product.uuid %></li>
+      <li>Inventory: <%= @product.amount %></li>
+    </ul>
+    <h3><strong>$<%= @product.price %></strong> 
+    <p>Amount: <input type="text" name="amount" value="1" /></p>
+    <%# Invoke the helper module in application_helper.rb to return a link to check out the total carts%>
+    <p><%= show_add_to_cart @product %></p>
+
+    <br />
+    <br />
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active"><a href="javascript:;">Item description</a></li>
+    </ul>
+    <br />
+    <div>
+      <%= @product.description %>
+    </div>
+  </div>
+</div>

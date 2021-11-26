@@ -1,0 +1,80 @@
+<h1>Order Comfirm</h1>
+<div class="row">
+  <div class="container">
+    <div class="page-header">
+      <h4><i class="fa fa-map-marker"></i> Delivery Address</h4>
+    </div>
+    <div class="pull-right">
+
+  <%= link_to "Build New Adress", new_address_path, class: "btn btn-info new-address-btn" %>
+</div>
+<div class="clearfix"></div>
+<br />
+<ul class="list-group">
+  <% unless @address.blank? %>
+
+      <li class="list-group-item">
+        <label>
+          <%= @address.contact_name %>
+          <%= @address.phone %>
+          <%= @address.street_address %>
+          <%= @address.suburb %>
+          <%= @address.state %>
+          <%= @address.postcode %>
+          <%= link_to "Edit", edit_address_path(@address), class: "inline" %>
+          <%= link_to "Delete", address_path(@address), method: 'delete', "data-confirm": "Are you sure?", class: "inline" %>
+        </label>
+      </li>
+  <% else %>
+    <li class="list-group-item">
+      Please add new postage address
+    </li>
+  <% end %>
+</ul>
+
+
+    <div class="page-header">
+      <h4><i class="fa fa-credit-card"></i> Payment Method</h4>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <input type="radio" name="payment_method" value="stripe" checked />
+        <%= image_tag "Stripe.jpg", width: 100 %>
+      </li>
+    </ul>
+
+    <div class="page-header">
+      <h4><i class="fa fa-list-alt"></i> Products Listing}</h4>
+    </div>
+    <% @shopping_carts.each do |shopping_cart| %>
+      <div class="media shopping-cart-row">
+        <div class="media-left">
+          <%= image_tag shopping_cart.product.product_image, class: 'media-object', alt: shopping_cart.product.title %>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading"><%= shopping_cart.product.title %></h4>
+          Amount: <%= shopping_cart.amount %> Price: $<%= shopping_cart.amount * shopping_cart.product.price %>
+        </div>
+      </div>
+    <% end %>
+
+    <br />
+    <div class="pull-right">
+
+        <input type="hidden"/>
+        <strong>Total Price: $<%= @shopping_carts.sum { |cart| cart.amount * cart.product.price } %></strong>
+            <div class="clearfix"></div>
+        <strong>Sorry, I need some more time to finish the checkout feature.</strong>
+        <input type="hidden" value="Order Comfirmed" class="btn btn-danger btn-lg" />
+    
+    </div>
+
+    <div class="clearfix"></div>
+    <br />
+    <br />
+    <br />
+    <br />
+  </div>
+</div>
+
+ 

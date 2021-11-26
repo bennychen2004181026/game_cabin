@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= yield :stylesheets %>
+  </head>
+
+  <body>
+    <%= render 'admin/layouts/nav' %>
+    <div class="container">
+      <% unless flash[:notice].blank? %>
+        <div class="alert alert-info"><%= flash[:notice] %></div>
+      <% end %>
+      <% unless flash[:alert].blank? %>
+        <div class="alert alert-info"><%= flash[:alert] %></div>
+      <% end %>
+      <%= yield %>
+    </div>
+ <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'  %>
+    <%= javascript_pack_tag 'admin' %>
+    <%= yield :javascripts %>
+  </body>
+</html>
