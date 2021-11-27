@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   # Just for making sure you can realize mistake in case you forgot to authorize your controller action
   after_action :verify_authorized, except: [:show]
-
+  
   def index
     @users = User.all
     authorize @users
@@ -39,9 +39,10 @@ class UsersController < ApplicationController
   end
   
   private
-
+  # Because devise already sanitize the email and password and comfirmation
+  # so I only strong my custom user attributes here.
   def strong_params
-    params.require(:user).permit(:role)
+    params.require(:user).permit(:role,:uuid)
   end
 
 end

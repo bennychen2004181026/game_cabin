@@ -1,7 +1,11 @@
 class ShoppingCart < ApplicationRecord
+   # Validation of user_uuid attribute
   validates :user_uuid, presence: true
+
+   # Validation of product_id attribute
   validates :product_id, presence: true
-  validates :amount, presence: true
+   # Validation of amount attribute
+   validates :amount, numericality: { only_integer: true}
 
   belongs_to :product
 

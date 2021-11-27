@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
      # Devise's helper user authentication method
+     # User need to login to actually start shopping from here!! 
+     # So the authentication start from here and the following progress need aythentication as well.
   before_action :authenticate_user!
 
    def new

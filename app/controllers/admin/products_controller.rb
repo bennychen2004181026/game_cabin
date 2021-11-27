@@ -1,6 +1,6 @@
 class Admin::ProductsController < Admin::BaseController
 
-
+ 
 
   before_action :find_product, only: [:edit, :update, :destroy]
   before_action :product_params, only: [:create, :update]
@@ -28,10 +28,8 @@ class Admin::ProductsController < Admin::BaseController
   def create
 
     @product = Product.create(product_params)
-
+    @product.user_uuid = current_user.uuid 
     @root_categories = Category.roots
-
-
 
     if @product.save
 
@@ -111,7 +109,7 @@ class Admin::ProductsController < Admin::BaseController
 
   private
     def product_params
-      params.require(:product).permit(:category_id,:title,:status,:amount, :uuid, :price, :description,:product_image)
+      params.require(:product).permit(:category_id,:title,:status,:amount, :uuid, :price, :description,:product_image,:user_uuid)
     end
 
 end

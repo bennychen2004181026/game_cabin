@@ -27,7 +27,7 @@
         
          
  <% if product.product_image.representable? %>
-        <td><%= image_tag product.product_image.representation(resize_to_limit: [160, 160]).processed.service_url %></td>
+        <td><%= image_tag product.product_image.representation(resize_to_limit: [160, 160]).processed %></td>
       <% else %>
          <td> <%= image_tag "Product_placeholder.jpg", alt: "Default product placeholder image" %></td>
          <% end %>

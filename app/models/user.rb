@@ -7,7 +7,8 @@ class User < ApplicationRecord
 
   # Two kind of user role
 
-  enum role: [:user, :admin]
+  enum role: [:user,:admin]
+  # When user created, attach role and uuid attributes
   after_initialize :set_default_role, :if => :new_record?
   after_initialize :set_user_uuid, :if => :new_record?
   

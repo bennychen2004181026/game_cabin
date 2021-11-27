@@ -42,7 +42,7 @@
           <div class="form-group">
             <label for="state" class="col-sm-2 control-label">State:*</label>
             <div class="col-sm-7">
-              <%= f.text_area :state, class: "form-control" %>
+              <%= f.select :state, options_for_select([["Select State", ""], "ACT", "NSW", "NT", "QLD", "SA","TAS", "VIC", "WA"]),{}, :class => 'form-control' %>
             </div>
             <div class="col-sm-2 address_input_error">
             </div>

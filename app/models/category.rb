@@ -6,11 +6,20 @@ class Category < ApplicationRecord
     has_ancestry orphan_strategy: :destroy
     has_many :products, dependent: :destroy
 
-
+    # Validation of title attribute
     validates :title, presence: { message: "The title should not be empty" }
     validates :title, uniqueness: { message: "The title already exists" }
     validates :title, length: { maximum: 30,
       too_long: "%{count} characters is the maximum allowed" }
+    # Validation of weight attribute
+    validates_numericality_of :weight, greater_than_or_equal_to: 0,
+    message: "Weight of product has to over 0"
+    validates_numericality_of :weight, less_than_or_equal_to: 100,
+    message: "Weight of product has to within 0 to 100"
+    validates_numericality_of :weight, only_integer: true,
+    message: "Weight of product has to be an integer"
+    
+    
   
 
     # Because my app's searching features is runing base on the Categories and sub-category of all items, a handy method is

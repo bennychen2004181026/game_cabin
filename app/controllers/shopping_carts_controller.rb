@@ -22,7 +22,7 @@ class ShoppingCartsController < ApplicationController
     # Because user can click the homepage 'add to cart' button for one or more time, so we can treat the behaivor differently,
     # so a method defined in cart model will determine what to do base on the cart is newly created or user want to increase
     # the quantity of the product.The argurment is a hash.The exclamation point means this method is going to save and update record in the database.
-    @shopping_cart = ShoppingCart.create_or_update({
+    @shopping_cart = ShoppingCart.create_or_update!({
       # uuid is fetched from session, because when viewer click the add to cart button before login, a uuid is generated and assign to session.
       user_uuid: session[:user_uuid],
       # product_id is fetched from the url post method

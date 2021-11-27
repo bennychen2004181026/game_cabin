@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
     private
     # Pundit custom error messages
     def user_not_authorized
-      flash[:alert] = "Sorry, Access denied."
+      flash[:alert] = "Sorry, Access denied. You are not the owner of the item or you are not admin!"
       redirect_to (request.referrer || root_path)
     end
 end
