@@ -1,13 +1,15 @@
 
 
 
-<div class="row">
-
 
   <% @products.each do |product| %>
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
-        <%= link_to image_tag(product.product_image, alt: product.title), product_path(product) %>
+      <% if product.product_image.representable? %>
+        <%= link_to image_tag(product.product_image.representation(resize_to_limit: [380, 240]).processed, alt: product.title), product_path(product) %>
+        <% else %>
+        <%= link_to image_tag("Product_placeholder.jpg", alt: product.title), product_path(product)  %></td>
+        <% end %>
         <div class="caption">
           <h4><%= link_to product.title, product_path(product), class: 'title' %></h4>
           <p><strong>$<%= product.price %></strong>  </p>

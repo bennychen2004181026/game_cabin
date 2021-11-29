@@ -47,7 +47,7 @@ class Product < ApplicationRecord
 
   belongs_to :category
   has_one :shopping_cart
-  belongs_to :user
+  belongs_to :user,optional:true
   has_one_attached :product_image
   has_one :order
 

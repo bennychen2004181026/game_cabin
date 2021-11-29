@@ -14,7 +14,11 @@
     <div class="row">
         <div class="col-xs-6 col-md-3">
           <a href="#" class="thumbnail detail">
+          <% if @product.product_image.representable? %>
             <%= image_tag @product.product_image.representation(resize_to_limit: [360, 360]).processed %>
+          <% else %>
+            <%= image_tag "Product_placeholder.jpg", alt: "Default product placeholder image" %></td>
+         <% end %>         
           </a>
         </div>
     </div>
