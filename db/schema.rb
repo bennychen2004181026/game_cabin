@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_29_084452) do
+ActiveRecord::Schema.define(version: 2021_11_28_041940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2021_11_29_084452) do
     t.string "status", default: "available", null: false
     t.integer "amount", default: 0, null: false
     t.string "uuid", null: false
-    t.string "user_uuid"
+    t.string "user_uuid", null: false
     t.decimal "price", precision: 7, scale: 2, null: false
     t.text "description", null: false
     t.datetime "created_at", precision: 6, null: false
