@@ -6,9 +6,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :update_sanitized_params, if: :devise_controller?
 
   # GET /resource/sign_up
-  def new
-    super
-  end
+  # def new
+  #   super
+  # end
 
   # POST /resource
 

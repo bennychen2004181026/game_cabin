@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   enum role: [:user,:admin]
   # When user created, attach role and uuid attributes
-  after_initialize :set_default_role, :if => :new_record?
+  # after_initialize :set_default_role, :if => :new_record?
   after_initialize :set_user_uuid, :if => :new_record?
   
   has_one :address , dependent: :destroy
@@ -21,9 +21,9 @@ class User < ApplicationRecord
 
   # When new user create, it's normal user account.
   # And it ensures all user records has an unique uuid
-  def set_default_role
-    self.role ||= :user
-  end
+  # def set_default_role
+  #   self.role ||= :user
+  # end
   
   def set_user_uuid
    self.uuid ||= SecureRandom.base36(24)
