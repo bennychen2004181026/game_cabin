@@ -11,8 +11,8 @@
         <div class="caption">
           <h4><%= link_to product.title, product_path(product), class: 'title' %></h4>
           <p><strong>$<%= product.price %></strong>  </p>
-          <% # A help method that accept a product object and direct to the cart dispalying interface%>
-          <% # Additional hash argument is setting a small botton styling class%>
+          <% # show_add_to_cart is helper method defined in app/helper/app;icationhelper.rb and it repuires a product record as arrgument%>
+          <% #  and direct to the cart dispalying interface. Additional hash argument is for setting a small botton styling class%>
          <p><%= show_add_to_cart product%></p>
         </div>
       </div>

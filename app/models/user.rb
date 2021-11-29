@@ -15,7 +15,8 @@ class User < ApplicationRecord
   has_one :address , dependent: :destroy
   has_many :shopping_carts
   has_many :orders
-  has_many :payments
+  has_many :products
+  
 
 
   # When new user create, it's normal user account.

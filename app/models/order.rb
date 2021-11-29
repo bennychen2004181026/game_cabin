@@ -17,7 +17,7 @@ class Order < ApplicationRecord
   belongs_to :address
   belongs_to :product
 
-  has_many :shopping_carts\
+
   # Initialize the order with unique string id
   after_initialize :gen_order_no, if: :new_record?
 

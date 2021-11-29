@@ -8,11 +8,14 @@ class ProductsController < ApplicationController
   before_action :product_params, only: [:create,:update]
   # Fecching specific prodcut data first for related action need.
   before_action :find_product, only: [:show,:edit, :update, :destroy]
+
+
+  # GET	/products
   def index
     @products = Product.page(params[:page] || 1).per_page(params[:per_page] || 10).order("id desc")
   end
 
-
+  # GET	/products/:id
   def show
     # Beacuse products controllers is inherited from application controller 
     # and I invoke can this method from application controller
@@ -22,7 +25,8 @@ class ProductsController < ApplicationController
     get_categories_and_carts_num
  
   end
-
+  
+  # GET	/products/new
   def new
 
     @product = Product.new
@@ -31,7 +35,7 @@ class ProductsController < ApplicationController
 
   end
 
-
+  # POST	/products
 
   def create
 
@@ -53,7 +57,8 @@ class ProductsController < ApplicationController
 
     end
   end
-
+  
+  # GET	/products/:id/edit
   def edit
 
     # authorization method from pundit
@@ -65,7 +70,7 @@ class ProductsController < ApplicationController
   end
 
 
-
+  # PUT	/products/:id
   def update
 
     # authorization method from pundit
@@ -90,7 +95,7 @@ class ProductsController < ApplicationController
   end
 
 
-
+  # DELETE	/products/:id
   def destroy
  
     # authorization method from pundit
@@ -110,6 +115,8 @@ class ProductsController < ApplicationController
     end
 
   end
+
+  # GET	/products/search
   def search
     # searching base on title as the name of product and attaching the image to display
     @products = Product.where("title like :title", title: "%#{params[:w]}%")

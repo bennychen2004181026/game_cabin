@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_072718) do
+ActiveRecord::Schema.define(version: 2021_11_28_041940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2021_11_27_072718) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.integer "product_id", null: false
     t.integer "address_id", null: false
     t.integer "amount", null: false
@@ -71,12 +71,12 @@ ActiveRecord::Schema.define(version: 2021_11_27_072718) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.bigint "category_id"
+    t.bigint "category_id", null: false
     t.string "title", null: false
     t.string "status", default: "available", null: false
     t.integer "amount", default: 0, null: false
     t.string "uuid", null: false
-    t.string "user_uuid"
+    t.string "user_uuid", null: false
     t.decimal "price", precision: 7, scale: 2, null: false
     t.text "description", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2021_11_27_072718) do
   create_table "shopping_carts", force: :cascade do |t|
     t.integer "user_id"
     t.string "user_uuid", null: false
-    t.bigint "product_id"
+    t.bigint "product_id", null: false
     t.integer "amount", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

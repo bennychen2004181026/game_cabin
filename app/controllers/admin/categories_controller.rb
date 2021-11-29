@@ -39,7 +39,7 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def update
-    @category.attributes = params.require(:category).permit(:title,:weight,:products_quantity,:ancestry)
+    @category.attributes = params.require(:category).permit(:title,:weight,:ancestry)
 
     if @category.save
       flash[:notice] = "Successfully updated."

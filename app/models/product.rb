@@ -1,6 +1,4 @@
 class Product < ApplicationRecord
-  has_one_attached :product_image
-  belongs_to :category
 
   # Attach product's uuid when create
 
@@ -46,6 +44,13 @@ class Product < ApplicationRecord
 
   # Status helper module is located at application record to provide two status attributes
   scope :available, -> { where(status: Status::Available) }
+
+  belongs_to :category
+  has_one :shopping_cart
+  belongs_to :user
+  has_one_attached :product_image
+  has_one :order
+
 
   private
 
