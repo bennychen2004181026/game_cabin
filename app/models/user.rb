@@ -6,12 +6,11 @@ class User < ApplicationRecord
          :trackable
 
   # Two kind of user role
-
-  enum role: [:user,:admin]
+  enum role: { user: 'user', admin: 'admin'}
   # When user created, attach role and uuid attributes
   after_initialize :set_default_role, :if => :new_record?
   after_initialize :set_user_uuid, :if => :new_record?
-  
+
   has_one :address , dependent: :destroy
   has_many :shopping_carts
   has_many :orders
@@ -24,6 +23,7 @@ class User < ApplicationRecord
   def set_default_role
     self.role ||= :user
   end
+
   
   def set_user_uuid
    self.uuid ||= SecureRandom.base36(24)
