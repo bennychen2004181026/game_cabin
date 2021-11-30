@@ -6,7 +6,7 @@
     <div class="col-sm-6 col-md-4">
       <div class="thumbnail">
       <% if product.product_image.representable? %>
-        <%= link_to image_tag(product.product_image.representation(resize_to_limit: [380, 240]).processed, alt: product.title), product_path(product) %>
+        <%= link_to image_tag(product.product_image.representation(resize_to_limit: [390, 260]).processed, alt: product.title), product_path(product) %>
         <% else %>
         <%= link_to image_tag("Product_placeholder.jpg", alt: product.title), product_path(product)  %></td>
         <% end %>
