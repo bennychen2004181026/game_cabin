@@ -23,29 +23,21 @@ class Admin::ProductsController < Admin::BaseController
 
   end
 
-
-
   def create
 
-    @product = Product.create(product_params)
-    @product.user_uuid = current_user.uuid 
+    @product = Product.new(product_params)
+    @product.user_uuid = current_user.uuid
     @root_categories = Category.roots
 
     if @product.save
-
       flash[:notice] = "Successfully created."
-
       redirect_to admin_products_path
-
     else
       flash[:alert] = "Sorry, it failed."
       render action: :new
-
     end
-
+    
   end
-
-
 
   def edit
 

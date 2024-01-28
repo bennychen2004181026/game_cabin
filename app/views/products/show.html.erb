@@ -15,7 +15,7 @@
         <div class="col-xs-6 col-md-3">
           <a href="#" class="thumbnail detail">
           <% if @product.product_image.representable? %>
-            <%= image_tag @product.product_image.representation(resize_to_limit: [540, 360]).processed %>
+            <%= image_tag @product.product_image.representation(resize_to_limit: [360, 360]).processed, class: 'media-object', alt: @product.title%>
           <% else %>
             <%= image_tag "Product_placeholder.jpg", alt: "Default product placeholder image" %></td>
          <% end %>         
@@ -28,7 +28,8 @@
       <li>Inventory: <%= @product.amount %></li>
     </ul>
     <h3><strong>$<%= @product.price %></strong> 
-    <p>Amount: <input type="text" name="amount" value="1" /></p>
+    <p>Amount: <%= number_field_tag 'amount', 1, min: 1, max: @product.amount, class: 'form-control' %>
+</p>
     <%# Invoke the helper module in application_helper.rb to return a link to check out the total carts%>
     <p><%= show_add_to_cart @product %></p>
 

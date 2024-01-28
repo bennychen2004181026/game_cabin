@@ -88,3 +88,4 @@ gem 'active_storage_validations'
 # Front end styling
 gem 'font-awesome-rails'
 
+gem 'rollbar'

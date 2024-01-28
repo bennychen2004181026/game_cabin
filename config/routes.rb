@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'errors/not_found'
+  get 'errors/internal_server_error'
+  get 'errors/unprocessable_entity'
   devise_for :users, controllers: { sessions: 'users/sessions',
     registrations: 'users/registrations'}
     
@@ -85,5 +88,9 @@ Rails.application.routes.draw do
   # put '/shopping_carts/:id', to: 'shopping_carts#update', as: 'shopping_carts'
   # delete '/shopping_carts/:id', to: 'shopping_carts#destroy'
   resources :shopping_carts, only: [:index,:create,:update,:destroy]
-  
+  delete '/clear', to: 'orders#clear_data'
+
+  match "/404", to: "errors#not_found", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
+  match "/422", to: "errors#unprocessable_entity", via: :all
 end

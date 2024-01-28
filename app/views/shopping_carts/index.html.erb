@@ -19,7 +19,8 @@ Carts (<%= @shopping_carts.count %>)</h1>
             </div>
             <div class="media-right">
               <%= form_tag shopping_cart_path(shopping_cart), method: :put do %>
-                <p><input type="text" name="amount" value="<%= shopping_cart.amount %>" /></p>
+                <p><%= number_field_tag 'amount', shopping_cart.amount, min: 1, max: shopping_cart.product.amount %>
+                </p>
                 <p>
                   <%= submit_tag "renew", class: "btn btn-default btn-xs" %>
                   <%= link_to "delete", shopping_cart_path(shopping_cart), method: :delete, 'data-confirm': "Are you sure?", class: "btn btn-default btn-xs" %>

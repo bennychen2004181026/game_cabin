@@ -18,11 +18,10 @@ class CheckoutController < ApplicationController
     # Declear a empty order ayy for line_items in strip session
     @orders = []
     @shopping_carts.each do |cart|
-      order = nil
       order = {
         name: cart.product.title,
         price: cart.product.price,
-        amount: cart.product.amount,
+        amount: (cart.product.price * 100).to_i,
         currency: 'aud',
         total_price: cart.product.amount * cart.product.price
       }

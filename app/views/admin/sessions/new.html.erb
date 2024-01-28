@@ -1,6 +1,11 @@
-<h1>Admin::Sessions#new</h1>
-<p>Sorry for not providing authorization of admin account here</p>
-<p>The problem is I can not change the role attribute of user model!!</p>
-<p>That is a weird problem for me and even I tried several days and consult with </p>
-<p>my educator and still get unfixed, without that attribute I can't design the authority of account </p>
-
+<h1>Welcome to the Admin Dashboard, <%= current_user.email %></h1>
+<p>Information:</p>
+<ul>
+  <li>Email: <%= current_user.email %></li>
+  <li>Sign-in Count: <%= current_user.sign_in_count %></li>
+  <li>Current Sign-in Time: <%= current_user.current_sign_in_at %></li>
+  <li>Last Sign-in Time: <%= current_user.last_sign_in_at %></li>
+  <li>Account Creation Time: <%= current_user.created_at %></li>
+  <li>Last Update Time: <%= current_user.updated_at %></li>
+  <li>Role: <%= current_user.role %></li>
+</ul>

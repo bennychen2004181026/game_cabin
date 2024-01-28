@@ -1,9 +1,9 @@
 class ProductsController < ApplicationController
-   # Devise's helper user authentication method
-   # Make sure user is login to have a user_uuid to attach on the item being created or check authority of processing item
-   before_action :authenticate_user!
-   # Make it easy for searching
-   before_action :get_categories_and_carts_num
+  # Devise's helper user authentication method
+  # Make sure user is login to have a user_uuid to attach on the item being created or check authority of processing item
+  before_action :authenticate_user!
+  # Make it easy for searching
+  before_action :get_categories_and_carts_num
   # Sanitize params before the item got create or recreate.
   before_action :product_params, only: [:create,:update]
   # Fecching specific prodcut data first for related action need.
@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
   def show
     # Beacuse products controllers is inherited from application controller 
     # and I invoke can this method from application controller
-     # And there is another invoke needed in the categories controller as well,
+    # And there is another invoke needed in the categories controller as well,
     # so I choose define the method in application controller rather than using 
     # before_action method.
     get_categories_and_carts_num
@@ -36,25 +36,17 @@ class ProductsController < ApplicationController
   end
 
   # POST	/products
-
   def create
-
-    @product = Product.create(product_params)
-    # Append user's uuid to this product so let this product give full access to this user.
-    @product.user_uuid = current_user.uuid 
+    @product = Product.new(product_params)
+    @product.user_uuid = current_user.uuid
     @root_categories = Category.roots
-
+  
     if @product.save
-      
-     
       flash[:notice] = "Successfully created."
-
       redirect_to products_path
-
     else
       flash[:alert] = "Sorry, it failed."
       render action: :new
-
     end
   end
   

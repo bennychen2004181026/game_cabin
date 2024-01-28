@@ -26,7 +26,7 @@
       <tr>
 
  <% if product.product_image.representable? %>
-        <td><%= image_tag product.product_image.representation(resize_to_limit: [190, 160]).processed %></td>
+        <td><%= image_tag product.product_image.representation(resize_to_limit: [120, 120]).processed, class: 'media-object', alt: product.title %></td>
       <% else %>
          <td> <%= image_tag "Product_placeholder.jpg", alt: "Default product placeholder image" %></td>
          <% end %>

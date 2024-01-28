@@ -15,30 +15,37 @@ class ShoppingCart < ApplicationRecord
 
   belongs_to :product
 
+  validate :amount_must_be_less_than_or_equal_to_product_amount
   # For searching all the shopping carts that the user has.
   scope :by_user_uuid, ->(user_uuid) { where(user_uuid: user_uuid) }
 
   # Thi method is defined for cart controller. '**'represent the argument is a hash.
   # Cart attributes has uuid, product id and amount of this item.
   def self.create_or_update!(options = {})
-    # To identify which cart I want to update or creat, I need to fetch the current user uuid and product.
     cond = {
       user_uuid: options[:user_uuid],
       product_id: options[:product_id]
     }
-    # 'First' is for searching the newest record of this cart.
-    record = where(cond).first
-    # if has a match newest record, it means the cart is already create and this product's 'add to cart'
-    # button is already been clicked, then update the attributes
-    if record
-      # Updating the record amount attribute by using hash merge and update! method to save in database.
-      # The exclamation point means when somthing wrong happen, an exception will be arised.
-      record.update!(options.merge(amount: record.amount + options[:amount]))
+    record = where(cond).first_or_initialize
+
+    record.amount = record.new_record? ? options[:amount] : record.amount + options[:amount]
+
+    if record.valid?
+      record.save!
+      record
     else
-      # If can't find a match one, then create a new one with the attributes hash and save!.
-      record = create!(options)
+      Rails.logger.error "ShoppingCart create_or_update! failed: #{record.errors.full_messages.join(', ')}"
+      nil
     end
-    # Return the new record
-    record
+  end
+
+  private
+
+  def amount_must_be_less_than_or_equal_to_product_amount
+    return if amount.blank? || product.blank? || product.amount.blank?
+
+    if amount > product.amount
+      errors.add(:amount, "can't be greater than the product's available amount")
+    end
   end
 end

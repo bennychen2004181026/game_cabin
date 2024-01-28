@@ -1,4 +1,20 @@
 <h1>Order Comfirm</h1>
+
+<div class="modal fade" tabindex="-1" id="confirmationModal" style="display:none;">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h4 class="text text-success"><i class='fa fa-check-circle-o'></i>Checkout</h4>
+      </div>
+      <div class="modal-footer">
+        <%= button_tag type: 'button', class: "btn btn-success btn-lg", id: "clear-data-and-home" do %>
+        Back to Home
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="container">
     <div class="page-header">
@@ -44,12 +60,12 @@
     </ul>
 
     <div class="page-header">
-      <h4><i class="fa fa-list-alt"></i> Products Listing}</h4>
+      <h4><i class="fa fa-list-alt"></i> Products Listings</h4>
     </div>
     <% @shopping_carts.each do |shopping_cart| %>
       <div class="media shopping-cart-row">
         <div class="media-left">
-          <%= image_tag shopping_cart.product.product_image.representation(resize_to_limit: [160, 160]), class: 'media-object', alt: shopping_cart.product.title %>
+          <%= image_tag shopping_cart.product.product_image.representation(resize_to_limit: [120, 120]), class: 'media-object', alt: shopping_cart.product.title %>
         </div>
         <div class="media-body">
           <h4 class="media-heading"><%= shopping_cart.product.title %></h4>
@@ -60,15 +76,14 @@
 
     <br />
     <div class="pull-right">
-
-        <input type="hidden"/>
-        <strong>Total Price: $<%= @shopping_carts.sum { |cart| cart.amount * cart.product.price } %></strong>
-            <div class="clearfix"></div>
-        <strong>Sorry, I need some more time to finish the checkout feature.</strong>
-        <input type="hidden" value="Order Comfirmed" class="btn btn-danger btn-lg" />
-    
+      <strong>total: $<%= @shopping_carts.sum { |cart| cart.amount * cart.product.price } %></strong>
+      &nbsp;
+<%= form_tag '#', method: :post, id: 'checkout-form' do %>
+  <%= button_tag type: 'button', class: "btn btn-danger btn-lg", id: 'order-confirmed-btn' do %>
+    Checkout
+  <% end %>
+<% end %>
     </div>
+    <div class="clearfix"></div>
   </div>
 </div>
-
- 

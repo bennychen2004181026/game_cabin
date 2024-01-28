@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unprocessable Entity</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1 class="display-1">422</h1>
+        <p class="lead">The change you wanted was rejected. Maybe you tried to change something you didn't have access to.</p>
+        <%= link_to 'Go Back', :back, class: 'btn btn-primary' %>
+        <%= link_to 'Home', root_path, class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

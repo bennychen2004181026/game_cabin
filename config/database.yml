@@ -79,7 +79,4 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: game_cabin_production
-  username: game_cabin
-  password: <%= ENV['GAME_CABIN_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
