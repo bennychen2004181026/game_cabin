@@ -11,7 +11,7 @@
         <%= link_to image_tag("Product_placeholder.jpg", alt: product.title), product_path(product)  %></td>
         <% end %>
         <div class="caption">
-          <h4><%= link_to product.title, product_path(product), class: 'title' %></h4>
+          <h4 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><%= link_to product.title, product_path(product), class: 'title' %></h4>
           <p><strong>$<%= product.price %></strong>  </p>
           <% # show_add_to_cart is helper method defined in app/helper/app;icationhelper.rb and it repuires a product record as arrgument%>
           <% #  and direct to the cart dispalying interface. Additional hash argument is for setting a small botton styling class%>
